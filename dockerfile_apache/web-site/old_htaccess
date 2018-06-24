@@ -1,0 +1,39 @@
+ServerName localhost
+
+#LoadModule deflate_module /usr/local/apache2/modules/mod_deflate.so
+#LoadModule proxy_module /usr/local/apache2/modules/mod_proxy.so
+#LoadModule proxy_fcgi_module /usr/local/apache2/modules/mod_proxy_fcgi.so
+
+
+LoadModule deflate_module /usr/local/apache2/modules/mod_deflate.so
+LoadModule proxy_module /usr/local/apache2/modules/mod_proxy.so
+LoadModule proxy_fcgi_module /usr/local/apache2/modules/mod_proxy_fcgi.so
+# Deliberate error LoadModule proxy_http_module222 /usr/local/apache2/modules/mod_proxy_http222.so
+
+
+<Directory "/usr/local/apache2/htdocs/">
+    AllowOverride All
+    Require all granted
+</Directory>
+
+<VirtualHost *:80>
+    ServerName docker.dev
+    ServerAlias www.dev.dev
+#    DocumentRoot /usr/local/apache2/htdocs
+	DocumentRoot /usr/local/apache2/htdocs
+    DirectoryIndex index.php index.html
+
+    <IfModule proxy_module>
+        #ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://dbase:9000//usr/local/apache2/htdocs/$1
+		ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://dbase:9000//var/www.html/$1
+    </IfModule>
+
+  #  <Directory "/usr/local/apache2/htdocs">
+	<Directory "/usr/local/apache2/htdocs">
+        Options +Indexes +FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        Allow from All
+    </Directory>
+</VirtualHost>
+

@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+if [ -e ./setup ]; then
+./setup
+fi
+
+# start apache
+exec /usr/sbin/apachectl -DFOREGROUND;

@@ -1,0 +1,13 @@
+docker run --name testcontainer -e MYSQL_ROOT_PASSWORD=password -e MYSQL_USER=john -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=mydatabase -d 1838e1c2a8b2
+
+See SQL commands at https://www.tutorialspoint.com/sql/sql-create-table.htm
+
+Had to run vagrant up, then execute the command above.
+Then quickly, while the container is still up, Docker exec into it with bin/bash
+
+
+'/var/run/mysqld
+
+/etc/my.cnf /etc/mysql/my.cnf ~/.my.cnf
+
+mysqld --user=root

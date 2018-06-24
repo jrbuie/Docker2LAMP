@@ -1,0 +1,4 @@
+.vagrant
+ubuntu-xenial*.log
+dockerfile_mysql/data_dir
+
